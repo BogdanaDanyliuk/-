@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int minSteps(int x, int y) {
+    int dp[32];
+    dp[0] = 0;
+    dp[1] = 1;
+
+    for (int i = 2; i <= y - x; i++) {
+        dp[i] = dp[i - 1] + 1;
+        if (i % 2 == 0)
+            dp[i] = (dp[i] < dp[i / 2] + 1) ? dp[i] : dp[i / 2] + 1;
+        if (i % 3 == 0)
+            dp[i] = (dp[i] < dp[i / 3] + 1) ? dp[i] : dp[i / 3] + 1;
+    }
+
+    return dp[y - x];
+}
+
+int main() {
+    int x, y;
+
+    printf("Введіть значення x: ");
+    scanf("%d", &x);
+    printf("Введіть значення y: ");
+    scanf("%d", &y);
+
+    int steps = minSteps(x, y);
+    printf("Мінімальна кількість кроків: %d\n", steps);
+
+    return 0;
+}
