@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+// Функція для знаходження НСД двох чисел
+int gcd(int a, int b) {
+    if (b == 0)
+        return a;
+    else
+        return gcd(b, a % b);
+}
+
+// Функція для знаходження НСК двох чисел
+int lcm(int a, int b) {
+    return (a * b) / gcd(a, b);
+}
+
+int main() {
+    int n, i;
+    int numbers[20];  // Масив для зберігання введених чисел
+    int result;
+
+    // Зчитуємо кількість чисел
+    printf("Введіть кількість чисел (2 <= n <= 20): ");
+    scanf("%d", &n);
+
+    // Зчитуємо числа
+    printf("Введіть числа, розділені пробілом: ");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &numbers[i]);
+    }
+
+    // Знаходимо НСК чисел
+    result = numbers[0];
+    for (i = 1; i < n; i++) {
+        result = lcm(result, numbers[i]);
+    }
+
+    // Виводимо результат
+    printf("Найменше спільне кратне: %d\n", result);
+
+    return 0;
+}
